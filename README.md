@@ -5,4 +5,4 @@ Jesús Menacho
 Andrés Burgos
 Melissa Román
 
-![Diagram] /Resources/CoffeeMaker.png
+[!Diagram] /Resources/CoffeeMaker.png
