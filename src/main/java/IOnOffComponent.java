@@ -1,3 +1,4 @@
+package main.java;
 
 public interface IOnOffComponent {
 	void turnOn();
