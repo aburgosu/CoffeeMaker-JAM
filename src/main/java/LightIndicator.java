@@ -1,4 +1,4 @@
-package CoffeMaker;
+package java;
 
 public class LightIndicator {
 
