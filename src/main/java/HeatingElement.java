@@ -1,5 +1,5 @@
 package main.java;
 
-public class HeatingElement extends OnOffComponent {
+public class HeatingElement extends Component {
 
 }

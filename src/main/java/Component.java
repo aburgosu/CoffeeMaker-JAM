@@ -1,9 +1,9 @@
 package main.java;
 
-public abstract class OnOffComponent implements IOnOffComponent{
+public abstract class Component implements IComponent{
 	boolean status;
 	
-	OnOffComponent(){
+	Component(){
 		status=false;
 	}
 	

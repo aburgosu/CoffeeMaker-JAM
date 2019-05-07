@@ -1,6 +1,6 @@
 package main.java;
 
-public interface IOnOffComponent {
+public interface IComponent {
 	void turnOn();
 	void turnOff();
 	boolean getStatus();

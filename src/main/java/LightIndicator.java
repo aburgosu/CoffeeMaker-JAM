@@ -1,6 +1,6 @@
 package main.java;
 
-public class LightIndicator extends OnOffComponent {
+public class LightIndicator extends Component {
 
 	
 
