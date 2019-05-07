@@ -1,5 +1,5 @@
 package main.java;
 
-public class IOnOffComponent {
+public class IComponent {
 
 }
