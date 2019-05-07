@@ -1,5 +1,5 @@
 
-public class Valve extends OnOffComponent{
+public class HeatingElement extends OnOffComponent {
 
 	public void turnOn() {
 		
@@ -15,5 +15,5 @@ public class Valve extends OnOffComponent{
 		
 		return false;
 	}
-
+	
 }

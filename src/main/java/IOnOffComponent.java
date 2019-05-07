@@ -1,5 +1,6 @@
-package java;
 
-public class IOnOffComponent {
-
+public interface IOnOffComponent {
+	void turnOn();
+	void turnOff();
+	boolean getStatus();
 }
