@@ -4,12 +4,18 @@ public class WarmerPlate {
 	ISensor plateSensor;
 	IComponent heatingElement;
 	IContainer pot;
-	
-	void warmPot() {
-		
+
+	WarmerPlate() {
+		plateSensor = new PlateSensor();
+		heatingElement = new HeatingElement();
+		pot = new Pot(12, 0);
 	}
-	
+
+	void warmPot() {
+		if()
+	}
+
 	void stopWarmingPot() {
-		
+
 	}
 }
