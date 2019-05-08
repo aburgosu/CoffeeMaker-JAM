@@ -1,5 +1,7 @@
 package main.java;
 
-public class PlateSensor {
-   
+public class PlateSensor extends Sensor {
+   PlateSensor(){
+	   status=2;
+   }
 }
