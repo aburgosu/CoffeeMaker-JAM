@@ -3,7 +3,7 @@ package main.java;
 public abstract class Sensor implements ISensor{
 	protected int status;
 	
-	Sensor(){
+	public Sensor(){
 		status=0;
 	}
 

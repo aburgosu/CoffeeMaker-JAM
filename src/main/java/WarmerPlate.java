@@ -8,12 +8,13 @@ public class WarmerPlate {
 	WarmerPlate() {
 		plateSensor = new PlateSensor();
 		heatingElement = new HeatingElement();
-		pot = new Pot(12, 0);
+		pot = new Pot(12, 0);// CoffeeMaker's totalCapacity is 12 cups
 	}
 
 	void warmPot() {
 		if(plateSensor.getStatus()==2) {
 			heatingElement.turnOn();
+			System.out.println("warming the pot");
 		}
 	}
 
@@ -25,12 +26,18 @@ public class WarmerPlate {
 		plateSensor.setStatus(1);
 	}
 	
-	void takePot() {
+	void liftPot() {
 		plateSensor.setStatus(0);
 	}
 	
-	void incrementLiquidInPot() {
-		pot.incrementCapacityInUse();
+	void incrementLiquidInPot(int qtyCups) throws InterruptedException {
 		plateSensor.setStatus(2);
+		warmPot();
+		for(int i=0; i<qtyCups;i++) {
+			Thread.sleep(1000);
+			System.out.println("Coffee dripping "+(i+1));
+			pot.incrementCapacityInUse();
+		}
+		
 	}
 }

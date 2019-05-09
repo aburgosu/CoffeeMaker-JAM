@@ -1,17 +1,17 @@
 package main.java;
 
 public class Button {
-	boolean status;
+	private boolean status;
 
-	Button() {
+	public Button() {
 		status = false;
 	}
 
-	boolean isPressed() {
+	public boolean isPressed() {
 		return status;
 	}
 
-	void press() {
+	public void press() {
 		status = true;
 	}
 

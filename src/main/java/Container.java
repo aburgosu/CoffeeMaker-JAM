@@ -1,10 +1,10 @@
 package main.java;
 
 public abstract class Container implements IContainer {
-	int capacityInUse;
-	int totalCapacity;
+	protected int capacityInUse;
+	protected int totalCapacity;
 
-	Container(int totalCapacity, int capacityInUse) {
+	public Container(int totalCapacity, int capacityInUse) {
 		this.capacityInUse = capacityInUse;
 		this.totalCapacity = totalCapacity;
 	}

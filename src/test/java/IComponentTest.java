@@ -1,8 +1,13 @@
-package main.java;
+package test.java;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import main.java.HeatingElement;
+import main.java.IComponent;
+import main.java.LightIndicator;
+import main.java.Valve;
 
 public class IComponentTest {
 

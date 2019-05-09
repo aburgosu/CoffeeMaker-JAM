@@ -1,8 +1,12 @@
-package main.java;
+package test.java;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import main.java.IContainer;
+import main.java.Pot;
+import main.java.WaterStrainer;
 
 public class IContainerTest {
 

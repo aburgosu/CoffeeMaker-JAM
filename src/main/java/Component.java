@@ -3,11 +3,12 @@ package main.java;
 public abstract class Component implements IComponent{
 	protected boolean status;
 	
-	Component(){
+	public Component(){
 		status=false;
 	}
 	
 	public void turnOn() {
+		
 		this.status=true;
 		
 	}
