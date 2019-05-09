@@ -6,4 +6,6 @@ public class WaterStrainer extends Container{
 		super(totalCapacity, capacityInUse);
 	}
 
+	
+
 }

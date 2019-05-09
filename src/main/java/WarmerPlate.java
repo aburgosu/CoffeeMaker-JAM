@@ -12,10 +12,25 @@ public class WarmerPlate {
 	}
 
 	void warmPot() {
-	
+		if(plateSensor.getStatus()==2) {
+			heatingElement.turnOn();
+		}
 	}
 
 	void stopWarmingPot() {
-
+		heatingElement.turnOff();
+	}
+	
+	void placePot() {
+		plateSensor.setStatus(1);
+	}
+	
+	void takePot() {
+		plateSensor.setStatus(0);
+	}
+	
+	void incrementLiquidInPot() {
+		pot.incrementCapacityInUse();
+		plateSensor.setStatus(2);
 	}
 }
