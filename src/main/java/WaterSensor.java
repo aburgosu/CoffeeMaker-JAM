@@ -1,7 +1,7 @@
 package main.java;
 
-public class WaterSensor extends Sensor{
-	public WaterSensor(){
-		status=0;
+public class WaterSensor extends Sensor {
+	public WaterSensor() {
+		status = 0;
 	}
 }

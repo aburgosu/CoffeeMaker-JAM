@@ -12,7 +12,7 @@ public class WarmerPlate {
 	}
 
 	void warmPot() {
-		if(plateSensor.getStatus()==2) {
+		if (plateSensor.getStatus() == 2) {
 			heatingElement.turnOn();
 			System.out.println("warming the pot");
 		}
@@ -21,23 +21,23 @@ public class WarmerPlate {
 	void stopWarmingPot() {
 		heatingElement.turnOff();
 	}
-	
+
 	void placePot() {
 		plateSensor.setStatus(1);
 	}
-	
+
 	void liftPot() {
 		plateSensor.setStatus(0);
 	}
-	
+
 	void incrementLiquidInPot(int qtyCups) throws InterruptedException {
 		plateSensor.setStatus(2);
 		warmPot();
-		for(int i=0; i<qtyCups;i++) {
+		for (int i = 0; i < qtyCups; i++) {
 			Thread.sleep(1000);
-			System.out.println("Coffee dripping "+(i+1));
+			System.out.println("Coffee dripping " + (i + 1));
 			pot.incrementCapacityInUse();
 		}
-		
+
 	}
 }

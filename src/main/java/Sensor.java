@@ -1,10 +1,10 @@
 package main.java;
 
-public abstract class Sensor implements ISensor{
+public abstract class Sensor implements ISensor {
 	protected int status;
-	
-	public Sensor(){
-		status=0;
+
+	public Sensor() {
+		status = 0;
 	}
 
 	public int getStatus() {
