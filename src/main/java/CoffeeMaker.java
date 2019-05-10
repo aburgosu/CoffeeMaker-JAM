@@ -23,20 +23,22 @@ public class CoffeeMaker {
 		Scanner inputScan = new Scanner(System.in);
 		int qtyCups = inputScan.nextInt();
 		boiler.pourWater(qtyCups);
+		warmerPlate.placePot();
 
 		System.out.println("Waiting for start Button...");
 		int input = inputScan.nextInt();
-		if (input == 1)
+		if (input == 1) {
 			button.press();
+		}
 
 		if (button.isPressed()) {
 			System.out.println("startButton pressed");
 			startBrewing();
-			coffeeDripping(qtyCups);
-			lightIndicator.turnOn();
-			System.out.println("LightIndicator ON, coffee ready");
+			if (coffeeDripping(qtyCups)) {
+				lightIndicator.turnOn();
+				System.out.println("LightIndicator ON, coffee ready");
+			}
 		}
-
 	}
 
 	public void startBrewing() throws InterruptedException {
@@ -45,11 +47,12 @@ public class CoffeeMaker {
 
 	}
 
-	public void coffeeDripping(int qtyCups) throws InterruptedException {
+	public boolean coffeeDripping(int qtyCups) throws InterruptedException {
 		System.out.println("Coffee in delivery pipe");
 		warmerPlate.incrementLiquidInPot(qtyCups);
 		stopFlowOfWater();
 		System.out.println("Boiler's heatingElement turned OFF, pressureValve opened");
+		return true;
 	}
 
 	public void stopFlowOfWater() {
