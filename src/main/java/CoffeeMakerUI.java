@@ -13,11 +13,13 @@ import javax.swing.JButton;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class CoffeeMakerUI {
 
 	private JFrame frame;
-
+	private CoffeMaker coffeeMaker;
 	/**
 	 * Launch the application.
 	 */
@@ -39,6 +41,7 @@ public class CoffeeMakerUI {
 	 */
 	public CoffeeMakerUI() {
 		initialize();
+		coffeeMaker = new CoffeMaker();
 	}
 
 	/**
@@ -56,7 +59,7 @@ public class CoffeeMakerUI {
 		panel.setLayout(null);
 		
 		JLabel lblCoffeeMaker = new JLabel("Coffee Maker");
-		lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/coffeMaker.jpg")));
+		lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/CleanCoffeMaker.png")));
 		lblCoffeeMaker.setBounds(0, 0, 326, 448);
 		panel.add(lblCoffeeMaker);
 		
@@ -66,23 +69,33 @@ public class CoffeeMakerUI {
 		panel.add(panel_1);
 		panel_1.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JButton btnNewButton = new JButton("Fill Boiler");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnFillBoiler = new JButton("Fill Boiler");
+		btnFillBoiler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//pressButton();
 			}
 		});
-		panel_1.add(btnNewButton);
+		panel_1.add(btnFillBoiler);
 		
 		JButton btnBrew = new JButton("Fill Receptacle");
+		btnBrew.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		panel_1.add(btnBrew);
 		
-		JButton btnNewButton_1 = new JButton("Put Pot");
+		JButton btnNewButton_1 = new JButton("Place Pot");
 		panel_1.add(btnNewButton_1);
 		
 		JButton btnNewButton_3 = new JButton("Take Pot");
 		panel_1.add(btnNewButton_3);
 		
-		JButton btnNewButton_2 = new JButton("BREW");
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"4", "6", "8", "10", "12"}));
+		panel_1.add(comboBox);
+		
+		JButton btnNewButton_2 = new JButton("Make Coffe");
 		btnNewButton_2.setBackground(new Color(0, 139, 139));
 		panel_1.add(btnNewButton_2);
 	}
