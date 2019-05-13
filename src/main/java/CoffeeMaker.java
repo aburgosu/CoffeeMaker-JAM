@@ -17,20 +17,20 @@ public class CoffeeMaker {
 		System.out.println("Coffeemaker created");
 	}
 
-	public void startProcess() throws InterruptedException {
+	public void startProcess(int qtyCups) throws InterruptedException {
 		warmerPlate.placePot();
-		System.out.println("How many cups of coffee do you want?");
-		Scanner inputScan = new Scanner(System.in);
-		int qtyCups = inputScan.nextInt();
+		//System.out.println("How many cups of coffee do you want?");
+		//Scanner inputScan = new Scanner(System.in);
+		//int qtyCups = inputScan.nextInt();
 		boiler.pourWater(qtyCups);
 		warmerPlate.placePot();
-
-		System.out.println("Waiting for start Button...");
+		button.press();
+		/**System.out.println("Waiting for start Button...");
 		int input = inputScan.nextInt();
 		if (input == 1) {
 			button.press();
 		}
-
+		 */
 		if (button.isPressed()) {
 			System.out.println("startButton pressed");
 			startBrewing();
@@ -57,5 +57,33 @@ public class CoffeeMaker {
 
 	public void stopFlowOfWater() {
 		boiler.stopHeatingWater();
+	}
+
+	/**
+	 * @return the button
+	 */
+	public Button getButton() {
+		return button;
+	}
+
+	/**
+	 * @return the lightIndicator
+	 */
+	public IComponent getLightIndicator() {
+		return lightIndicator;
+	}
+
+	/**
+	 * @return the boiler
+	 */
+	public Boiler getBoiler() {
+		return boiler;
+	}
+
+	/**
+	 * @return the warmerPlate
+	 */
+	public WarmerPlate getWarmerPlate() {
+		return warmerPlate;
 	}
 }
