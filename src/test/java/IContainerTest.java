@@ -6,13 +6,13 @@ import org.junit.Test;
 
 import main.java.IContainer;
 import main.java.Pot;
-import main.java.WaterStrainer;
+import main.java.WaterContainer;
 
 public class IContainerTest {
 
 	@Test
 	public void getCapacityInUse_waterStrainer_correctResult() {
-		IContainer waterStrainer = new WaterStrainer(12,6);
+		IContainer waterStrainer = new WaterContainer(12,6);
 		assertEquals(6, waterStrainer.getCapacityInUse());
 	}
 
@@ -24,7 +24,7 @@ public class IContainerTest {
 	
 	@Test
 	public void setCapacityInUse_waterStrainer_correctResult() {
-		IContainer waterStrainer = new WaterStrainer(12,6);
+		IContainer waterStrainer = new WaterContainer(12,6);
 		waterStrainer.setCapacityInUse(7);
 		assertEquals(7, waterStrainer.getCapacityInUse());
 	}

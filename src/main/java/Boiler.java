@@ -4,13 +4,13 @@ public class Boiler {
 	private ISensor waterSensor;
 	private IComponent pressureValve;
 	private IComponent heatingElement;
-	private IContainer waterStrainer;
+	private IContainer waterContainer;
 
 	public Boiler() {
 		waterSensor = new WaterSensor();
 		pressureValve = new Valve();
 		heatingElement = new HeatingElement();
-		waterStrainer = new WaterStrainer(12, 0);// CoffeeMaker's totalCapacity is 12 cups
+		waterContainer = new WaterContainer(12, 0);// CoffeeMaker's totalCapacity is 12 cups
 	}
 
 	/**
@@ -18,12 +18,15 @@ public class Boiler {
 	 * is set, also waterSensor status is changed.
 	 */
 	public void pourWater(int cupsOfWater) {
-		waterStrainer.setCapacityInUse(cupsOfWater);
-		waterSensor.setStatus(1);
+		waterContainer.setCapacityInUse(cupsOfWater);
+		waterSensor.setStatus(WaterSensor.BOILER_NOT_EMPTY);
 	}
 
+	/**
+	 * This methods returns the waterContainer capacity in use.
+	 */
 	public int getCupsPrepared() {
-		return waterStrainer.getCapacityInUse();
+		return waterContainer.getCapacityInUse();
 	}
 
 	/**
@@ -34,16 +37,12 @@ public class Boiler {
 	 * @throws InterruptedException
 	 */
 	public void heatWater() throws InterruptedException {
-		if (waterSensor.getStatus() == 1) {
+		if (waterSensor.getStatus() == WaterSensor.BOILER_NOT_EMPTY) {
 			pressureValve.turnOff();
-
 			System.out.println("pressureValve closed");
-
 			heatingElement.turnOn();
-
 			System.out.println("heatingElement turned On");
-
-			for (int i = 0; i < waterStrainer.getCapacityInUse(); i++) {
+			for (int i = 0; i < waterContainer.getCapacityInUse(); i++) {
 				Thread.sleep(1000);
 				System.out.println("heating " + (i + 1));
 			}
