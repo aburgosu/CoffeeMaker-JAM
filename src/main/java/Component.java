@@ -1,6 +1,6 @@
 package main.java;
 
-<<<<<<< HEAD
+
 public abstract class Component implements IComponent {
 	protected boolean status;
 
@@ -19,8 +19,4 @@ public abstract class Component implements IComponent {
 	public boolean getStatus() {
 		return status;
 	}
-=======
-public class Component {
-   
->>>>>>> develop
 }
