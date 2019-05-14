@@ -1,5 +1,5 @@
 package main.java;
 
-public class LightIndicator {
+public class LightIndicator extends Component {
 
 }

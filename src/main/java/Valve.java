@@ -1,5 +1,5 @@
 package main.java;
 
-public class Valve {
-   
+public class Valve extends Component {
+
 }

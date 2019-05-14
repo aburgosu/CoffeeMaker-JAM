@@ -1,5 +1,7 @@
 package main.java;
 
-public class ISensor {
+public interface ISensor {
+	int getStatus();
 
+	void setStatus(int status);
 }
