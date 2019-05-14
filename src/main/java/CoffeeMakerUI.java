@@ -80,14 +80,25 @@ public class CoffeeMakerUI {
 			}
 		});
 		buttonsPanel.add(btnPlacePot);
-
-		JButton btnFillBoiler = new JButton("Fill Boiler");
+		JPanel panelFillWaterSelector = new JPanel();
+		buttonsPanel.add(panelFillWaterSelector);
+		panelFillWaterSelector.setLayout(new BorderLayout(0, 0));
+		
+		JComboBox comboBoxWaterSelector = new JComboBox();
+		comboBoxWaterSelector.setModel(new DefaultComboBoxModel(new String[] {"4", "6", "8", "10", "12"}));
+		panelFillWaterSelector.add(comboBoxWaterSelector, BorderLayout.WEST);
+		
+    JButton btnFillBoiler = new JButton("Fill Boiler");
+		panelFillWaterSelector.add(btnFillBoiler, BorderLayout.CENTER);
 		btnFillBoiler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				markIV.getBoiler().pourWater(10);
-				lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/boilerFilled10.png")));
+				String optionSelected = comboBoxWaterSelector.getSelectedItem().toString();
+				markIV.getBoiler().pourWater(Integer.parseInt(optionSelected));
+				String icon = "/visualResources/boilerFilled"+optionSelected+".png";
+				lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource(icon)));
 			}
 		});
+
 		buttonsPanel.add(btnFillBoiler);
 
 		JButton btnFillReceptacle = new JButton("Fill Receptacle");
@@ -100,12 +111,17 @@ public class CoffeeMakerUI {
 
 		JButton btnTakePot = new JButton("Take Pot");
 		buttonsPanel.add(btnTakePot);
-
+		
+		JPanel jPanelBrewSelector = new JPanel();
+		buttonsPanel.add(jPanelBrewSelector);
+		jPanelBrewSelector.setLayout(new BorderLayout(0, 0));
+		
 		JComboBox qtyCups = new JComboBox();
-		qtyCups.setModel(new DefaultComboBoxModel(new String[] { "4", "6", "8", "10", "12" }));
-		buttonsPanel.add(qtyCups);
-
+		jPanelBrewSelector.add(qtyCups, BorderLayout.WEST);
+		qtyCups.setModel(new DefaultComboBoxModel(new String[] {"4", "6", "8", "10", "12"}));
+		
 		JButton btnBrew = new JButton("Brew");
+		jPanelBrewSelector.add(btnBrew, BorderLayout.CENTER);
 		btnBrew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/coffeeMakerOn.png")));
@@ -117,6 +133,5 @@ public class CoffeeMakerUI {
 				}
 			}
 		});
-		buttonsPanel.add(btnBrew);
 	}
 }
