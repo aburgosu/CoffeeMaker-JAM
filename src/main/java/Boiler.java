@@ -19,11 +19,11 @@ public class Boiler {
 	 */
 	public void pourWater(int cupsOfWater) {
 		waterContainer.setCapacityInUse(cupsOfWater);
-		waterSensor.setStatus(1);
+		waterSensor.setStatus(WaterSensor.BOILER_NOT_EMPTY);
 	}
 
 	/**
-	 * This methods returns the waterContainer capacity in use. 
+	 * This methods returns the waterContainer capacity in use.
 	 */
 	public int getCupsPrepared() {
 		return waterContainer.getCapacityInUse();
@@ -37,7 +37,7 @@ public class Boiler {
 	 * @throws InterruptedException
 	 */
 	public void heatWater() throws InterruptedException {
-		if (waterSensor.getStatus() == 1) {
+		if (waterSensor.getStatus() == WaterSensor.BOILER_NOT_EMPTY) {
 			pressureValve.turnOff();
 			System.out.println("pressureValve closed");
 			heatingElement.turnOn();

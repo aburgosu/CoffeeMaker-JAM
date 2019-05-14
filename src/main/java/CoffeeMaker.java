@@ -34,12 +34,25 @@ public class CoffeeMaker {
 		}
 	}
 
+	/**
+	 * CoffeMaker starts the brewing process by heating the water
+	 * 
+	 * @throws InterruptedException
+	 */
 	public void startBrewing() throws InterruptedException {
 		System.out.println("startBrewing...");
 		boiler.heatWater();
 
 	}
 
+	/**
+	 * After the water is boiling the coffee starts dripping in the pot. Once the
+	 * dripping is finished the boiler stops its processes.
+	 * 
+	 * @param qtyCups
+	 * @return
+	 * @throws InterruptedException
+	 */
 	public boolean coffeeDripping(int qtyCups) throws InterruptedException {
 		System.out.println("Coffee in delivery pipe");
 		warmerPlate.incrementLiquidInPot(qtyCups);
@@ -48,6 +61,10 @@ public class CoffeeMaker {
 		return true;
 	}
 
+	/**
+	 * Boiler turn off its heating element and open the valve to relief the
+	 * pressure.
+	 */
 	public void stopFlowOfWater() {
 		boiler.stopHeatingWater();
 	}
