@@ -99,7 +99,7 @@ public class CoffeeMakerUI {
 			}
 		});
 
-		buttonsPanel.add(btnFillBoiler);
+		panelFillWaterSelector.add(btnFillBoiler);
 
 		JButton btnFillReceptacle = new JButton("Fill Receptacle");
 		btnFillReceptacle.addActionListener(new ActionListener() {
