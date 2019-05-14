@@ -5,6 +5,7 @@ public class Boiler {
 	private IComponent pressureValve;
 	private IComponent heatingElement;
 	private IContainer waterContainer;
+	private ISensor receptacleSensor;
 
 	public Boiler() {
 		waterSensor = new WaterSensor();
@@ -58,4 +59,14 @@ public class Boiler {
 		pressureValve.turnOn();
 		heatingElement.turnOff();
 	}
+	
+	/**
+	 * Ground coffee is filled in the receptacle, sensor status is changed.
+	 */
+	public void fillReceptacle() {
+		receptacleSensor.setStatus(ReceptacleSensor.RECEPTACLE_NOT_EMPTY);
+	}
+
 }
+
+
