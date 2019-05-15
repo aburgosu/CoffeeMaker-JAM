@@ -11,6 +11,7 @@ public class Boiler {
 		waterSensor = new WaterSensor();
 		pressureValve = new Valve();
 		heatingElement = new HeatingElement();
+		receptacleSensor = new ReceptacleSensor();
 		waterContainer = new WaterContainer(12, 0);// CoffeeMaker's totalCapacity is 12 cups
 	}
 
@@ -38,7 +39,8 @@ public class Boiler {
 	 * @throws InterruptedException
 	 */
 	public void heatWater() throws InterruptedException {
-		if (waterSensor.getStatus() == WaterSensor.BOILER_NOT_EMPTY) {
+		if (waterSensor.getStatus() == WaterSensor.BOILER_NOT_EMPTY
+				&& receptacleSensor.getStatus() == ReceptacleSensor.RECEPTACLE_NOT_EMPTY) {
 			pressureValve.turnOff();
 			System.out.println("pressureValve closed");
 			heatingElement.turnOn();
@@ -59,7 +61,7 @@ public class Boiler {
 		pressureValve.turnOn();
 		heatingElement.turnOff();
 	}
-	
+
 	/**
 	 * Ground coffee is filled in the receptacle, sensor status is changed.
 	 */
@@ -68,5 +70,3 @@ public class Boiler {
 	}
 
 }
-
-
