@@ -2,11 +2,11 @@ package main.java;
 
 public class Boiler {
 	private ISensor waterSensor;
+	private ISensor receptacleSensor;
 	private IComponent pressureValve;
 	private IComponent heatingElement;
 	private IContainer waterContainer;
-	private ISensor receptacleSensor;
-
+	
 	public Boiler() {
 		waterSensor = new WaterSensor();
 		pressureValve = new Valve();
