@@ -74,7 +74,7 @@ public class CoffeeMakerUI {
 		JButton btnPlacePot = new JButton("Place Pot");
 		btnPlacePot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				markIV.getWarmerPlate().placePot();
+				markIV.placePotInWarmerPlate();//method implemented to not use get()
 				lblCoffeeMaker
 						.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/CleanCoffeMaker.png")));
 			}
@@ -88,12 +88,12 @@ public class CoffeeMakerUI {
 		comboBoxWaterSelector.setModel(new DefaultComboBoxModel(new String[] {"4", "6", "8", "10", "12"}));
 		panelFillWaterSelector.add(comboBoxWaterSelector, BorderLayout.WEST);
 		
-    JButton btnFillBoiler = new JButton("Fill Boiler");
+		JButton btnFillBoiler = new JButton("Fill Boiler");
 		panelFillWaterSelector.add(btnFillBoiler, BorderLayout.CENTER);
 		btnFillBoiler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String optionSelected = comboBoxWaterSelector.getSelectedItem().toString();
-				markIV.getBoiler().pourWater(Integer.parseInt(optionSelected));
+				markIV.pourWaterInBoiler(Integer.parseInt(optionSelected));///method implemented to no use get()
 				String icon = "/visualResources/boilerFilled"+optionSelected+".png";
 				lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource(icon)));
 			}
@@ -104,6 +104,7 @@ public class CoffeeMakerUI {
 		JButton btnFillReceptacle = new JButton("Fill Receptacle");
 		btnFillReceptacle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				markIV.fillGroundCoffee();//fill receptacle modified from last version
 				lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/receptacleFill.png")));
 			}
 		});

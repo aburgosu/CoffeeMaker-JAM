@@ -1,6 +1,6 @@
 package main.java;
 
-public class WarmerPlate {
+public class WarmerPlate implements IObserver {
 	ISensor plateSensor;
 	IComponent heatingElement;
 	IContainer pot;
@@ -9,6 +9,7 @@ public class WarmerPlate {
 		plateSensor = new PlateSensor();
 		heatingElement = new HeatingElement();
 		pot = new Pot(12, 0);// CoffeeMaker's totalCapacity is 12 cups
+		((ISubject) plateSensor).attach(this);
 	}
 
 	/**
@@ -34,6 +35,7 @@ public class WarmerPlate {
 	 */
 	void placePot() {
 		plateSensor.setStatus(PlateSensor.POT_EMPTY);
+		((ISubject) plateSensor).report();	
 	}
 
 	/**
@@ -41,6 +43,7 @@ public class WarmerPlate {
 	 */
 	void liftPot() {
 		plateSensor.setStatus(PlateSensor.WARMER_EMPTY);
+		((ISubject) plateSensor).report();
 	}
 
 	/**
@@ -52,12 +55,23 @@ public class WarmerPlate {
 	 */
 	void incrementLiquidInPot(int qtyCups) throws InterruptedException {
 		plateSensor.setStatus(PlateSensor.POT_NOT_EMPTY);
-		warmPot();
+		((ISubject) plateSensor).report();
+		//warmPot();
 		for (int i = 0; i < qtyCups; i++) {
 			Thread.sleep(1000);
 			System.out.println("Coffee dripping " + (i + 1));
 			pot.incrementCapacityInUse();
 		}
 
+	}
+
+	public void update() {
+		if (plateSensor.getStatus() == PlateSensor.WARMER_EMPTY || plateSensor.getStatus() == PlateSensor.POT_EMPTY) {
+			heatingElement.turnOff();
+			System.out.println("Plate's heatingElement OFF");
+		} else if (plateSensor.getStatus() == PlateSensor.POT_NOT_EMPTY) {
+			heatingElement.turnOn();
+			System.out.println("Plate's heatingElement ON");
+		}
 	}
 }

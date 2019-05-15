@@ -16,7 +16,7 @@ public class Boiler {
 	}
 
 	/**
-	 * When the user pours water into the waterStrainer, waterStrainer capacityInUse
+	 * When the user pours water into the waterContainer, waterContainer capacityInUse
 	 * is set, also waterSensor status is changed.
 	 */
 	public void pourWater(int cupsOfWater) {

@@ -70,16 +70,24 @@ public class CoffeeMaker {
 	}
 
 	/**
-	 * @return the boiler
+	 * Ground coffee is filled in the receptacle.
 	 */
-	public Boiler getBoiler() {
-		return boiler;
+	public void fillGroundCoffee() {
+		boiler.fillReceptacle();
 	}
-
+	
 	/**
-	 * @return the warmerPlate
+	 * Pour water in the boiler.
+	 * @param qtyCups - Quantity of water cups that are poured in the boiler
 	 */
-	public WarmerPlate getWarmerPlate() {
-		return warmerPlate;
+	public void pourWaterInBoiler(int qtyCups) {
+		boiler.pourWater(qtyCups);
+	}
+	
+	/**
+	 * Place the pot in warmerPlater.
+	 */
+	public void placePotInWarmerPlate() {
+		warmerPlate.placePot();
 	}
 }
