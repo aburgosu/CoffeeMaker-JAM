@@ -42,9 +42,7 @@ public class Boiler {
 		if (waterSensor.getStatus() == WaterSensor.BOILER_NOT_EMPTY
 				&& receptacleSensor.getStatus() == ReceptacleSensor.RECEPTACLE_NOT_EMPTY) {
 			pressureValve.turnOff();
-			System.out.println("pressureValve closed");
 			heatingElement.turnOn();
-			System.out.println("heatingElement turned On");
 			for (int i = 0; i < waterContainer.getCapacityInUse(); i++) {
 				Thread.sleep(1000);
 				System.out.println("heating " + (i + 1));

@@ -56,7 +56,6 @@ public class WarmerPlate implements IObserver {
 	void incrementLiquidInPot(int qtyCups) throws InterruptedException {
 		plateSensor.setStatus(PlateSensor.POT_NOT_EMPTY);
 		((ISubject) plateSensor).report();
-		//warmPot();
 		for (int i = 0; i < qtyCups; i++) {
 			Thread.sleep(1000);
 			System.out.println("Coffee dripping " + (i + 1));

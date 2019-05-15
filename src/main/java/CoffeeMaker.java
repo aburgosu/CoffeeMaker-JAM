@@ -30,7 +30,7 @@ public class CoffeeMaker {
 		startBrewing();
 		if (coffeeDripping(qtyCups)) {
 			lightIndicator.turnOn();
-			System.out.println("LightIndicator ON, coffee ready");
+			System.out.println("Coffee ready");
 		}
 	}
 
@@ -57,7 +57,6 @@ public class CoffeeMaker {
 		System.out.println("Coffee in delivery pipe");
 		warmerPlate.incrementLiquidInPot(qtyCups);
 		stopFlowOfWater();
-		System.out.println("Boiler's heatingElement turned OFF, pressureValve opened");
 		return true;
 	}
 
