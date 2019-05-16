@@ -21,28 +21,23 @@ public class CoffeeMaker {
 
 	/**
 	 * Once the button is pressed the CoffeeMaker starts with the brewing process
+	 * First boils water Then starts coffee dripping
 	 * 
 	 * @param qtyCups - To start the process it is needed to give the quantity of
 	 *                coffee cups
 	 * @throws InterruptedException
 	 */
-	public void startProcess(int qtyCups) throws InterruptedException {
-		startBrewing();
-		if (coffeeDripping(qtyCups)) {
-			lightIndicator.turnOn();
-			System.out.println("LightIndicator ON, coffee ready");
+	public void brewCoffee(int qtyCups) throws InterruptedException {
+		if (warmerPlate.isPotInPlace()) {
+			System.out.println("Starting brewing process");
+			boiler.heatWater();
+			if (coffeeDripping(qtyCups)) {
+				lightIndicator.turnOn();
+				System.out.println("Coffee ready");
+			}
+		} else {
+			System.out.println("Please place pot in warmerPlate");
 		}
-	}
-
-	/**
-	 * CoffeMaker starts the brewing process by heating the water
-	 * 
-	 * @throws InterruptedException
-	 */
-	public void startBrewing() throws InterruptedException {
-		System.out.println("startBrewing...");
-		boiler.heatWater();
-
 	}
 
 	/**
@@ -50,15 +45,16 @@ public class CoffeeMaker {
 	 * dripping is finished the boiler stops its processes.
 	 * 
 	 * @param qtyCups
-	 * @return
+	 * @return true if the cycle is finished
 	 * @throws InterruptedException
 	 */
 	public boolean coffeeDripping(int qtyCups) throws InterruptedException {
 		System.out.println("Coffee in delivery pipe");
-		warmerPlate.incrementLiquidInPot(qtyCups);
-		stopFlowOfWater();
-		System.out.println("Boiler's heatingElement turned OFF, pressureValve opened");
-		return true;
+		if (warmerPlate.incrementLiquidInPot(qtyCups) == qtyCups) {
+			boiler.stopHeatingWater();
+			return true;
+		} else
+			return false;
 	}
 
 	/**
@@ -70,16 +66,25 @@ public class CoffeeMaker {
 	}
 
 	/**
-	 * @return the boiler
+	 * Ground coffee is filled in the receptacle.
 	 */
-	public Boiler getBoiler() {
-		return boiler;
+	public void fillGroundCoffee() {
+		boiler.fillReceptacle();
 	}
 
 	/**
-	 * @return the warmerPlate
+	 * Pour water in the boiler.
+	 * 
+	 * @param qtyCups - Quantity of water cups that are poured in the boiler.
 	 */
-	public WarmerPlate getWarmerPlate() {
-		return warmerPlate;
+	public void pourWaterInBoiler(int qtyCups) {
+		boiler.pourWater(qtyCups);
+	}
+
+	/**
+	 * Place the pot in warmerPlater.
+	 */
+	public void placePotInWarmerPlate() {
+		warmerPlate.placePot();
 	}
 }
