@@ -71,7 +71,7 @@ public class CoffeeMaker {
 	/**
 	 * Pour water in the boiler.
 	 * 
-	 * @param qtyCups - Quantity of water cups that are poured in the boiler
+	 * @param qtyCups - Quantity of water cups that are poured in the boiler.
 	 */
 	public void pourWaterInBoiler(int qtyCups) {
 		boiler.pourWater(qtyCups);
