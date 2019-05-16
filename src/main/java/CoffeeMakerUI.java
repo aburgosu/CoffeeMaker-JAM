@@ -17,7 +17,6 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 public class CoffeeMakerUI {
-
 	private JFrame frame;
 	CoffeeMaker markIV;
 
@@ -127,7 +126,7 @@ public class CoffeeMakerUI {
 			public void actionPerformed(ActionEvent arg0) {
 				lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/coffeeMakerOn.png")));
 				try {
-					markIV.startProcess(Integer.parseInt(qtyCups.getSelectedItem().toString()));
+					markIV.brewCoffee(Integer.parseInt(qtyCups.getSelectedItem().toString()));
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

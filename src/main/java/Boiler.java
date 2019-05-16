@@ -6,18 +6,18 @@ public class Boiler {
 	private IComponent pressureValve;
 	private IComponent heatingElement;
 	private IContainer waterContainer;
-	
+
 	public Boiler() {
 		waterSensor = new WaterSensor();
 		pressureValve = new Valve();
 		heatingElement = new HeatingElement();
 		receptacleSensor = new ReceptacleSensor();
-		waterContainer = new WaterContainer(12, 0);// CoffeeMaker's totalCapacity is 12 cups
+		waterContainer = new WaterContainer(12);// CoffeeMaker's totalCapacity is 12 cups
 	}
 
 	/**
-	 * When the user pours water into the waterContainer, waterContainer capacityInUse
-	 * is set, also waterSensor status is changed.
+	 * When the user pours water into the waterContainer, waterContainer
+	 * capacityInUse is set, also waterSensor status is changed.
 	 */
 	public void pourWater(int cupsOfWater) {
 		waterContainer.setCapacityInUse(cupsOfWater);
@@ -27,7 +27,7 @@ public class Boiler {
 	/**
 	 * This methods returns the waterContainer capacity in use.
 	 */
-	public int getCupsPrepared() {
+	public int getCupsToBePrepared() {
 		return waterContainer.getCapacityInUse();
 	}
 
@@ -43,11 +43,12 @@ public class Boiler {
 				&& receptacleSensor.getStatus() == ReceptacleSensor.RECEPTACLE_NOT_EMPTY) {
 			pressureValve.turnOff();
 			heatingElement.turnOn();
+			System.out.println("Boiler's heatingElement ON");
 			for (int i = 0; i < waterContainer.getCapacityInUse(); i++) {
 				Thread.sleep(1000);
-				System.out.println("heating " + (i + 1));
+				System.out.println("Heeating water " + (i + 1));
 			}
-			System.out.println("<<boiling point>>");
+			System.out.println("<<Boiling point>>");
 		}
 	}
 
@@ -58,6 +59,7 @@ public class Boiler {
 	public void stopHeatingWater() {
 		pressureValve.turnOn();
 		heatingElement.turnOff();
+		System.out.println("Boiler's heatingElement OFF");
 	}
 
 	/**

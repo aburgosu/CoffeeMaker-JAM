@@ -1,7 +1,6 @@
 package main.java;
 
 public interface ISubject {
-
 	public void report();
 
 	public void attach(IObserver observer);

@@ -8,7 +8,7 @@ public class WarmerPlate implements IObserver {
 	WarmerPlate() {
 		plateSensor = new PlateSensor();
 		heatingElement = new HeatingElement();
-		pot = new Pot(12, 0);// CoffeeMaker's totalCapacity is 12 cups
+		pot = new Pot(12);// CoffeeMaker's totalCapacity is 12 cups
 		((ISubject) plateSensor).attach(this);
 	}
 
@@ -35,7 +35,7 @@ public class WarmerPlate implements IObserver {
 	 */
 	void placePot() {
 		plateSensor.setStatus(PlateSensor.POT_EMPTY);
-		((ISubject) plateSensor).report();	
+		((ISubject) plateSensor).report();
 	}
 
 	/**
@@ -48,29 +48,36 @@ public class WarmerPlate implements IObserver {
 
 	/**
 	 * Increment the liquid in pot cup by cup beginning in zero until the quantity
-	 * required.
+	 * required. Returns true if the qtyPreparedCups is equal to qtyCups.
 	 * 
 	 * @param qtyCups
 	 * @throws InterruptedException
 	 */
-	void incrementLiquidInPot(int qtyCups) throws InterruptedException {
+	int incrementLiquidInPot(int qtyCups) throws InterruptedException {
 		plateSensor.setStatus(PlateSensor.POT_NOT_EMPTY);
 		((ISubject) plateSensor).report();
+		int qtyPreparedCups = 0;
 		for (int i = 0; i < qtyCups; i++) {
 			Thread.sleep(1000);
-			System.out.println("Coffee dripping " + (i + 1));
+			qtyPreparedCups = i + 1;
+			System.out.println("Coffee dripping " + qtyPreparedCups);
 			pot.incrementCapacityInUse();
 		}
-
+		return qtyPreparedCups;
 	}
 
+	/**
+	 * Override of IObserver's method.
+	 * Update its state according a change in Subject.
+	 * The update is reflected in the turn On/Off of the warmerPlate's heating element.
+	 */
 	public void update() {
 		if (plateSensor.getStatus() == PlateSensor.WARMER_EMPTY || plateSensor.getStatus() == PlateSensor.POT_EMPTY) {
 			heatingElement.turnOff();
-			System.out.println("Plate's heatingElement OFF");
+			System.out.println("warmerPlate's heatingElement OFF");
 		} else if (plateSensor.getStatus() == PlateSensor.POT_NOT_EMPTY) {
 			heatingElement.turnOn();
-			System.out.println("Plate's heatingElement ON");
+			System.out.println("warmerPlate's heatingElement ON");
 		}
 	}
 }

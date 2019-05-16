@@ -21,28 +21,19 @@ public class CoffeeMaker {
 
 	/**
 	 * Once the button is pressed the CoffeeMaker starts with the brewing process
+	 * First boils water Then starts coffee dripping
 	 * 
 	 * @param qtyCups - To start the process it is needed to give the quantity of
 	 *                coffee cups
 	 * @throws InterruptedException
 	 */
-	public void startProcess(int qtyCups) throws InterruptedException {
-		startBrewing();
+	public void brewCoffee(int qtyCups) throws InterruptedException {
+		System.out.println("Starting brewing process");
+		boiler.heatWater();
 		if (coffeeDripping(qtyCups)) {
 			lightIndicator.turnOn();
 			System.out.println("Coffee ready");
 		}
-	}
-
-	/**
-	 * CoffeMaker starts the brewing process by heating the water
-	 * 
-	 * @throws InterruptedException
-	 */
-	public void startBrewing() throws InterruptedException {
-		System.out.println("startBrewing...");
-		boiler.heatWater();
-
 	}
 
 	/**
@@ -54,10 +45,11 @@ public class CoffeeMaker {
 	 * @throws InterruptedException
 	 */
 	public boolean coffeeDripping(int qtyCups) throws InterruptedException {
-		System.out.println("Coffee in delivery pipe");
-		warmerPlate.incrementLiquidInPot(qtyCups);
-		stopFlowOfWater();
-		return true;
+		if (warmerPlate.incrementLiquidInPot(qtyCups) == qtyCups) {
+			boiler.stopHeatingWater();
+			return true;
+		}
+		else return false;
 	}
 
 	/**
@@ -74,15 +66,16 @@ public class CoffeeMaker {
 	public void fillGroundCoffee() {
 		boiler.fillReceptacle();
 	}
-	
+
 	/**
 	 * Pour water in the boiler.
+	 * 
 	 * @param qtyCups - Quantity of water cups that are poured in the boiler
 	 */
 	public void pourWaterInBoiler(int qtyCups) {
 		boiler.pourWater(qtyCups);
 	}
-	
+
 	/**
 	 * Place the pot in warmerPlater.
 	 */
