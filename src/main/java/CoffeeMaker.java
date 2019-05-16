@@ -41,10 +41,11 @@ public class CoffeeMaker {
 	 * dripping is finished the boiler stops its processes.
 	 * 
 	 * @param qtyCups
-	 * @return
+	 * @return true if the cycle is finished
 	 * @throws InterruptedException
 	 */
 	public boolean coffeeDripping(int qtyCups) throws InterruptedException {
+		System.out.println("Coffee in delivery pipe");
 		if (warmerPlate.incrementLiquidInPot(qtyCups) == qtyCups) {
 			boiler.stopHeatingWater();
 			return true;
