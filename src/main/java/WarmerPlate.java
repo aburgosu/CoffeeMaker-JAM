@@ -54,9 +54,9 @@ public class WarmerPlate implements IObserver {
 	 * @throws InterruptedException
 	 */
 	int incrementLiquidInPot(int qtyCups) throws InterruptedException {
+		int qtyPreparedCups = 0;
 		plateSensor.setStatus(PlateSensor.POT_NOT_EMPTY);
 		((ISubject) plateSensor).report();
-		int qtyPreparedCups = 0;
 		for (int i = 0; i < qtyCups; i++) {
 			Thread.sleep(1000);
 			qtyPreparedCups = i + 1;
@@ -67,9 +67,9 @@ public class WarmerPlate implements IObserver {
 	}
 
 	/**
-	 * Override of IObserver's method.
-	 * Update its state according a change in Subject.
-	 * The update is reflected in the turn On/Off of the warmerPlate's heating element.
+	 * Override of IObserver's method. Update its state according a change in
+	 * Subject. The update is reflected in the turn On/Off of the warmerPlate's
+	 * heating element.
 	 */
 	public void update() {
 		if (plateSensor.getStatus() == PlateSensor.WARMER_EMPTY || plateSensor.getStatus() == PlateSensor.POT_EMPTY) {
@@ -78,6 +78,17 @@ public class WarmerPlate implements IObserver {
 		} else if (plateSensor.getStatus() == PlateSensor.POT_NOT_EMPTY) {
 			heatingElement.turnOn();
 			System.out.println("warmerPlate's heatingElement ON");
+		}
+	}
+
+	/**
+	 * @return true - if Pot is placed in warmerPlate.
+	 */
+	public boolean isPotInPlace() {
+		if (plateSensor.getStatus() == PlateSensor.POT_EMPTY) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

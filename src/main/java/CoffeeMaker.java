@@ -28,11 +28,15 @@ public class CoffeeMaker {
 	 * @throws InterruptedException
 	 */
 	public void brewCoffee(int qtyCups) throws InterruptedException {
-		System.out.println("Starting brewing process");
-		boiler.heatWater();
-		if (coffeeDripping(qtyCups)) {
-			lightIndicator.turnOn();
-			System.out.println("Coffee ready");
+		if (warmerPlate.isPotInPlace()) {
+			System.out.println("Starting brewing process");
+			boiler.heatWater();
+			if (coffeeDripping(qtyCups)) {
+				lightIndicator.turnOn();
+				System.out.println("Coffee ready");
+			}
+		} else {
+			System.out.println("Please place pot in warmerPlate");
 		}
 	}
 
@@ -49,8 +53,8 @@ public class CoffeeMaker {
 		if (warmerPlate.incrementLiquidInPot(qtyCups) == qtyCups) {
 			boiler.stopHeatingWater();
 			return true;
-		}
-		else return false;
+		} else
+			return false;
 	}
 
 	/**

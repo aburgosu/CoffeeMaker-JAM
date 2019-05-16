@@ -27,7 +27,7 @@ public class Boiler {
 	/**
 	 * This methods returns the waterContainer capacity in use.
 	 */
-	public int getCupsToBePrepared() {
+	public int getCupsPouredIn() {
 		return waterContainer.getCapacityInUse();
 	}
 
@@ -46,7 +46,7 @@ public class Boiler {
 			System.out.println("Boiler's heatingElement ON");
 			for (int i = 0; i < waterContainer.getCapacityInUse(); i++) {
 				Thread.sleep(1000);
-				System.out.println("Heeating water " + (i + 1));
+				System.out.println("Heating water " + (i + 1));
 			}
 			System.out.println("<<Boiling point>>");
 		}
