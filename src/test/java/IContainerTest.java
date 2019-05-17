@@ -12,27 +12,27 @@ public class IContainerTest {
 
 	@Test
 	public void getCapacityInUse_waterStrainer_correctResult() {
-		IContainer waterStrainer = new WaterContainer(12,6);
-		assertEquals(6, waterStrainer.getCapacityInUse());
+		IContainer waterStrainer = new WaterContainer(12);
+		assertEquals(0, waterStrainer.getCapacityInUse());
 	}
 
 	@Test
 	public void getCapacityInUse_Pot_correctResult() {
-		IContainer pot = new Pot(12,6);
-		assertEquals(6, pot.getCapacityInUse());
+		IContainer pot = new Pot(12);
+		assertEquals(0, pot.getCapacityInUse());
 	}
 	
 	@Test
 	public void setCapacityInUse_waterStrainer_correctResult() {
-		IContainer waterStrainer = new WaterContainer(12,6);
+		IContainer waterStrainer = new WaterContainer(12);
 		waterStrainer.setCapacityInUse(7);
 		assertEquals(7, waterStrainer.getCapacityInUse());
 	}
 
 	@Test
 	public void setCapacityInUse_Pot_correctResult() {
-		IContainer pot = new Pot(12,6);
-		pot.setCapacityInUse(12);
-		assertEquals(12, pot.getCapacityInUse());
+		IContainer pot = new Pot(12);
+		pot.setCapacityInUse(11);
+		assertEquals(11, pot.getCapacityInUse());
 	}
 }

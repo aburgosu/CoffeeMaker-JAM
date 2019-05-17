@@ -2,6 +2,7 @@ package main.java;
 
 public class Boiler {
 	private ISensor waterSensor;
+	private ISensor receptacleSensor;
 	private IComponent pressureValve;
 	private IComponent heatingElement;
 	private IContainer waterContainer;
@@ -10,12 +11,13 @@ public class Boiler {
 		waterSensor = new WaterSensor();
 		pressureValve = new Valve();
 		heatingElement = new HeatingElement();
-		waterContainer = new WaterContainer(12, 0);// CoffeeMaker's totalCapacity is 12 cups
+		receptacleSensor = new ReceptacleSensor();
+		waterContainer = new WaterContainer(12);// CoffeeMaker's totalCapacity is 12 cups
 	}
 
 	/**
-	 * When the user pours water into the waterStrainer, waterStrainer capacityInUse
-	 * is set, also waterSensor status is changed.
+	 * When the user pours water into the waterContainer, waterContainer
+	 * capacityInUse is set, also waterSensor status is changed.
 	 */
 	public void pourWater(int cupsOfWater) {
 		waterContainer.setCapacityInUse(cupsOfWater);
@@ -25,7 +27,7 @@ public class Boiler {
 	/**
 	 * This methods returns the waterContainer capacity in use.
 	 */
-	public int getCupsPrepared() {
+	public int getCupsPouredIn() {
 		return waterContainer.getCapacityInUse();
 	}
 
@@ -37,16 +39,16 @@ public class Boiler {
 	 * @throws InterruptedException
 	 */
 	public void heatWater() throws InterruptedException {
-		if (waterSensor.getStatus() == WaterSensor.BOILER_NOT_EMPTY) {
+		if (waterSensor.getStatus() == WaterSensor.BOILER_NOT_EMPTY
+				&& receptacleSensor.getStatus() == ReceptacleSensor.RECEPTACLE_NOT_EMPTY) {
 			pressureValve.turnOff();
-			System.out.println("pressureValve closed");
 			heatingElement.turnOn();
-			System.out.println("heatingElement turned On");
+			System.out.println("Boiler's heatingElement ON");
 			for (int i = 0; i < waterContainer.getCapacityInUse(); i++) {
 				Thread.sleep(1000);
-				System.out.println("heating " + (i + 1));
+				System.out.println("Heating water " + (i + 1));
 			}
-			System.out.println("<<boiling point>>");
+			System.out.println("<<Boiling point>>");
 		}
 	}
 
@@ -57,5 +59,14 @@ public class Boiler {
 	public void stopHeatingWater() {
 		pressureValve.turnOn();
 		heatingElement.turnOff();
+		System.out.println("Boiler's heatingElement OFF");
 	}
+
+	/**
+	 * Ground coffee is filled in the receptacle, sensor status is changed.
+	 */
+	public void fillReceptacle() {
+		receptacleSensor.setStatus(ReceptacleSensor.RECEPTACLE_NOT_EMPTY);
+	}
+
 }
