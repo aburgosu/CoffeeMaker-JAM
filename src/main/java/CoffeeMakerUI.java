@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.Color;
@@ -51,7 +52,7 @@ public class CoffeeMakerUI {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(CoffeeMakerUI.class.getResource("/javax/swing/plaf/basic/icons/image-failed.png")));
+				.getImage(CoffeeMakerUI.class.getResource("/javax/swing/plaf/basic/icons/JavaCup16.png")));
 		frame.setBounds(100, 100, 541, 477);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -59,14 +60,29 @@ public class CoffeeMakerUI {
 		frame.getContentPane().add(imagePanel, BorderLayout.CENTER);
 		imagePanel.setLayout(null);
 
-		JLabel lblCoffeeMaker = new JLabel("Coffee Maker");
-		lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/coffeeMakerEmpty.png")));
-		lblCoffeeMaker.setBounds(0, 0, 326, 448);
-		imagePanel.add(lblCoffeeMaker);
+		JLabel lblBoiler = new JLabel("");
+		lblBoiler.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/cleanBoiler.png")));
+		lblBoiler.setBounds(200, 0, 124, 448);
+		imagePanel.add(lblBoiler);
+
+		JLabel lblReceptacle = new JLabel("");
+		lblReceptacle.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/cleanRcptcl.png")));
+		lblReceptacle.setBounds(0, 0, 200, 191);
+		imagePanel.add(lblReceptacle);
+
+		JLabel lblPot = new JLabel("");
+		lblPot.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/withoutPot.png")));
+		lblPot.setBounds(0, 191, 200, 211);
+		imagePanel.add(lblPot);
+
+		JLabel lblLed = new JLabel("");
+		lblLed.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/barGray.png")));
+		lblLed.setBounds(0, 402, 200, 46);
+		imagePanel.add(lblLed);
 
 		JPanel buttonsPanel = new JPanel();
-		buttonsPanel.setBackground(Color.WHITE);
 		buttonsPanel.setBounds(325, 0, 210, 448);
+		buttonsPanel.setBackground(Color.WHITE);
 		imagePanel.add(buttonsPanel);
 		buttonsPanel.setLayout(new GridLayout(0, 1, 0, 0));
 
@@ -74,63 +90,91 @@ public class CoffeeMakerUI {
 		btnPlacePot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				markIV.placePotInWarmerPlate();//method implemented to not use get()
-				lblCoffeeMaker
-						.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/CleanCoffeMaker.png")));
+				lblPot.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/cleanPot.png")));
+
 			}
 		});
 		buttonsPanel.add(btnPlacePot);
+
+		JButton btnFillReceptacle = new JButton("Fill Receptacle");
+		btnFillReceptacle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+        markIV.fillGroundCoffee();//fill receptacle modified from last version
+				lblReceptacle.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/rcptclFilled.png")));
+			}
+		});
+		buttonsPanel.add(btnFillReceptacle);
+
 		JPanel panelFillWaterSelector = new JPanel();
 		buttonsPanel.add(panelFillWaterSelector);
 		panelFillWaterSelector.setLayout(new BorderLayout(0, 0));
-		
+
 		JComboBox comboBoxWaterSelector = new JComboBox();
-		comboBoxWaterSelector.setModel(new DefaultComboBoxModel(new String[] {"4", "6", "8", "10", "12"}));
+		comboBoxWaterSelector.setModel(new DefaultComboBoxModel(new String[] { "4", "6", "8", "10", "12" }));
 		panelFillWaterSelector.add(comboBoxWaterSelector, BorderLayout.WEST);
-		
 		JButton btnFillBoiler = new JButton("Fill Boiler");
 		panelFillWaterSelector.add(btnFillBoiler, BorderLayout.CENTER);
 		btnFillBoiler.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String optionSelected = comboBoxWaterSelector.getSelectedItem().toString();
 				markIV.pourWaterInBoiler(Integer.parseInt(optionSelected));///method implemented to no use get()
-				String icon = "/visualResources/boilerFilled"+optionSelected+".png";
-				lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource(icon)));
+				String icon = "/visualResources/boilerFilled" + optionSelected + ".png";
+				lblBoiler.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource(icon)));
 			}
 		});
 
 		panelFillWaterSelector.add(btnFillBoiler);
 
-		JButton btnFillReceptacle = new JButton("Fill Receptacle");
-		btnFillReceptacle.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				markIV.fillGroundCoffee();//fill receptacle modified from last version
-				lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/receptacleFill.png")));
-			}
-		});
-		buttonsPanel.add(btnFillReceptacle);
 
 		JButton btnTakePot = new JButton("Take Pot");
+		btnTakePot.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				markIV.getWarmerPlate().liftPot();
+        lblPot.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/withoutPot.png")));
+
+			}
+		});
 		buttonsPanel.add(btnTakePot);
-		
+
 		JPanel jPanelBrewSelector = new JPanel();
 		buttonsPanel.add(jPanelBrewSelector);
 		jPanelBrewSelector.setLayout(new BorderLayout(0, 0));
-		
+
 		JComboBox qtyCups = new JComboBox();
 		jPanelBrewSelector.add(qtyCups, BorderLayout.WEST);
-		qtyCups.setModel(new DefaultComboBoxModel(new String[] {"4", "6", "8", "10", "12"}));
-		
+		qtyCups.setModel(new DefaultComboBoxModel(new String[] { "4", "6", "8", "10", "12" }));
+
 		JButton btnBrew = new JButton("Brew");
 		jPanelBrewSelector.add(btnBrew, BorderLayout.CENTER);
+
 		btnBrew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				lblCoffeeMaker.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/main/java/coffeeMakerOn.png")));
-				try {
-					markIV.brewCoffee(Integer.parseInt(qtyCups.getSelectedItem().toString()));
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
+				if (markIV.getWarmerPlate().plateSensor.getStatus() != PlateSensor.WARMER_EMPTY) {
+					if (Integer.parseInt(qtyCups.getSelectedItem().toString()) <= Integer
+							.parseInt(comboBoxWaterSelector.getSelectedItem().toString())) { // obtener el agua del boiler y no del comboBox
+						lblPot.setIcon(
+								new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/potFilled4.png")));
+						lblLed.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/barRed.png")));
+						frame.update(frame.getGraphics());
+						try {
+							markIV.brewCoffee(Integer.parseInt(qtyCups.getSelectedItem().toString()));
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						String optionSelected = qtyCups.getSelectedItem().toString();
+						String icon = "/visualResources/potFilled" + optionSelected + ".png";
+						lblPot.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource(icon)));
+						lblLed.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/barGreen.png")));
+					} else {
+						JOptionPane.showMessageDialog(null, "Insufficient water!");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Please, place the pot");
+
 				}
+
 			}
 		});
 	}
