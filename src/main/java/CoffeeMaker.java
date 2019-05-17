@@ -3,7 +3,6 @@ package main.java;
 import java.util.Scanner;
 
 public class CoffeeMaker {
-	private Button button;
 	private IComponent lightIndicator;
 	private Boiler boiler;
 	private WarmerPlate warmerPlate;
@@ -13,7 +12,6 @@ public class CoffeeMaker {
 	 * and warmerPlate
 	 */
 	public CoffeeMaker() {
-		button = new Button();
 		lightIndicator = new LightIndicator();
 		boiler = new Boiler();
 		warmerPlate = new WarmerPlate();
