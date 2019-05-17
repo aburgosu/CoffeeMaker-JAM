@@ -87,4 +87,26 @@ public class CoffeeMaker {
 	public void placePotInWarmerPlate() {
 		warmerPlate.placePot();
 	}
+
+	/**
+	 * Lift the pot in warmerPlater.
+	 */
+	public void liftPot() {
+		warmerPlate.liftPot();
+	}
+
+	/**
+	 * Get the actual status of Warmer Plate.
+	 */
+	public int getWarmerPlateStatus() {
+		return warmerPlate.getSensorStatus();
+	}
+
+	/**
+	 * Get the actual status of Warmer Plate.
+	 */
+	public int getWaterOfBoiler() {
+		return boiler.getCupsPouredIn();
+	}
+
 }

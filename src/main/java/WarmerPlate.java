@@ -1,11 +1,11 @@
 package main.java;
 
 public class WarmerPlate implements IObserver {
-	ISensor plateSensor;
-	IComponent heatingElement;
-	IContainer pot;
+	private ISensor plateSensor;
+	private IComponent heatingElement;
+	private IContainer pot;
 
-	WarmerPlate() {
+	public WarmerPlate() {
 		plateSensor = new PlateSensor();
 		heatingElement = new HeatingElement();
 		pot = new Pot(12);// CoffeeMaker's totalCapacity is 12 cups
@@ -85,10 +85,11 @@ public class WarmerPlate implements IObserver {
 	 * @return true - if Pot is placed in warmerPlate.
 	 */
 	public boolean isPotInPlace() {
-		if (plateSensor.getStatus() == PlateSensor.POT_EMPTY) {
-			return true;
-		} else {
-			return false;
-		}
+		return plateSensor.getStatus() == PlateSensor.POT_EMPTY;
 	}
+	
+	public int getSensorStatus() {
+		return plateSensor.getStatus();
+	}
+	
 }
