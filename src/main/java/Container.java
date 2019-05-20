@@ -1,6 +1,6 @@
 package main.java;
 
-public abstract class Container implements IContainer {
+public class Container implements IContainer {
 	protected int capacityInUse;
 	protected int totalCapacity;
 

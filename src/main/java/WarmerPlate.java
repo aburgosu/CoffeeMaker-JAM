@@ -7,8 +7,8 @@ public class WarmerPlate implements IObserver {
 
 	public WarmerPlate() {
 		plateSensor = new PlateSensor();
-		heatingElement = new HeatingElement();
-		pot = new Pot(12);// CoffeeMaker's totalCapacity is 12 cups
+		heatingElement = new Component();
+		pot = new Container(12);// CoffeeMaker's totalCapacity is 12 cups
 		((ISubject) plateSensor).attach(this);
 	}
 
@@ -74,10 +74,10 @@ public class WarmerPlate implements IObserver {
 	public void update() {
 		if (plateSensor.getStatus() == PlateSensor.WARMER_EMPTY || plateSensor.getStatus() == PlateSensor.POT_EMPTY) {
 			heatingElement.turnOff();
-			System.out.println("warmerPlate's heatingElement OFF");
+			System.out.println("Warmer plate's heatingElement OFF");
 		} else if (plateSensor.getStatus() == PlateSensor.POT_NOT_EMPTY) {
 			heatingElement.turnOn();
-			System.out.println("warmerPlate's heatingElement ON");
+			System.out.println("Warmer plate's heatingElement ON");
 		}
 	}
 
@@ -88,8 +88,10 @@ public class WarmerPlate implements IObserver {
 		return plateSensor.getStatus() == PlateSensor.POT_EMPTY;
 	}
 	
+	/**
+	 * @return plateSensor's actual status
+	 */
 	public int getSensorStatus() {
 		return plateSensor.getStatus();
 	}
-	
 }

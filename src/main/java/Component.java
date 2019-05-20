@@ -1,7 +1,7 @@
 package main.java;
 
 
-public abstract class Component implements IComponent {
+public class Component implements IComponent {
 	protected boolean status;
 
 	public Component() {
