@@ -7,6 +7,10 @@ public class Boiler {
 	private IComponent heatingElement;
 	private IContainer waterContainer;
 
+	/**
+	 * Boiler constructor creates every necessary part that compose it.
+	 * Due to CoffeeMaker's capacity is 12 cups, waterContainer is created with a totalCapacity equal to 12.
+	 */
 	public Boiler() {
 		waterSensor = new WaterSensor();
 		pressureValve = new Component();

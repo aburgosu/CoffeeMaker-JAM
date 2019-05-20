@@ -32,7 +32,6 @@ public class CoffeeMaker {
 			if (coffeeDripping(qtyCups)) {
 				lightIndicator.turnOn();
 				System.out.println("Coffee ready");
-				System.out.println("Coffee ready");
 			}
 		} else {
 			System.out.println("Please place pot in warmerPlate");
