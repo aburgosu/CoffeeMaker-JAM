@@ -44,12 +44,22 @@ public class WarmerPlate implements IObserver {
 		plateSensor.setStatus(PlateSensor.POT_NOT_EMPTY);
 		((ISubject) plateSensor).report();
 		for (int i = 0; i < qtyCups; i++) {
-			Thread.sleep(1000);
+			// Thread.sleep(1000);
 			qtyPreparedCups = i + 1;
 			System.out.println("Coffee dripping " + qtyPreparedCups);
 			pot.incrementCapacityInUse();
 		}
 		return qtyPreparedCups;
+	}
+
+	public void fillPot(int qtyCups) {
+		for (int i = 0; i < qtyCups; i++) {
+			pot.incrementCapacityInUse();
+		}
+	}
+	public int getCupsInPot()
+	{
+		return pot.getCapacityInUse();
 	}
 
 	/**
