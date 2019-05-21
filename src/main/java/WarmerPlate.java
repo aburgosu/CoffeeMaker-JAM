@@ -5,29 +5,15 @@ public class WarmerPlate implements IObserver {
 	private IComponent heatingElement;
 	private IContainer pot;
 
+	/**
+	 * Warmer Plate constructor creates every necessary part that compose it.
+	 * Due to CoffeeMaker's capacity is 12 cups, pot is created with a totalCapacity equal to 12.
+	 */
 	public WarmerPlate() {
 		plateSensor = new PlateSensor();
-		heatingElement = new HeatingElement();
-		pot = new Pot(12);// CoffeeMaker's totalCapacity is 12 cups
+		heatingElement = new Component();
+		pot = new Container(12);
 		((ISubject) plateSensor).attach(this);
-	}
-
-	/**
-	 * To warm the pot, once is verified that the pot is in place and not empty
-	 * (potNotEmpty), warmerPlate's heating element is turned on.
-	 */
-	void warmPot() {
-		if (plateSensor.getStatus() == PlateSensor.POT_NOT_EMPTY) {
-			heatingElement.turnOn();
-			System.out.println("warming the pot");
-		}
-	}
-
-	/**
-	 * To stop warming the pot, the heating element is turned off.
-	 */
-	void stopWarmingPot() {
-		heatingElement.turnOff();
 	}
 
 	/**
@@ -84,10 +70,10 @@ public class WarmerPlate implements IObserver {
 	public void update() {
 		if (plateSensor.getStatus() == PlateSensor.WARMER_EMPTY || plateSensor.getStatus() == PlateSensor.POT_EMPTY) {
 			heatingElement.turnOff();
-			System.out.println("warmerPlate's heatingElement OFF");
+			System.out.println("Warmer plate's heatingElement OFF");
 		} else if (plateSensor.getStatus() == PlateSensor.POT_NOT_EMPTY) {
 			heatingElement.turnOn();
-			System.out.println("warmerPlate's heatingElement ON");
+			System.out.println("Warmer plate's heatingElement ON");
 		}
 	}
 
@@ -97,9 +83,11 @@ public class WarmerPlate implements IObserver {
 	public boolean isPotInPlace() {
 		return plateSensor.getStatus() == PlateSensor.POT_EMPTY;
 	}
-
+	
+	/**
+	 * @return plateSensor's actual status
+	 */
 	public int getSensorStatus() {
 		return plateSensor.getStatus();
 	}
-
 }

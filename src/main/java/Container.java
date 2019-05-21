@@ -1,8 +1,8 @@
 package main.java;
 
-public abstract class Container implements IContainer {
-	protected int capacityInUse;
-	protected int totalCapacity;
+public class Container implements IContainer {
+	private int capacityInUse;
+	private int totalCapacity;
 
 	/**
 	 * Constructor requires one parameter to create the instance.
