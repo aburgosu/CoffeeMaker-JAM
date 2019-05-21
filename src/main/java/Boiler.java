@@ -45,7 +45,7 @@ public class Boiler {
 			heatingElement.turnOn();
 			System.out.println("Boiler's heatingElement ON");
 			for (int i = 0; i < waterContainer.getCapacityInUse(); i++) {
-				Thread.sleep(1000);
+				//Thread.sleep(1000);
 				System.out.println("Heating water " + (i + 1));
 			}
 			System.out.println("<<Boiling point>>");

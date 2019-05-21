@@ -78,6 +78,14 @@ public class CoffeeMaker {
 	public void pourWaterInBoiler(int qtyCups) {
 		boiler.pourWater(qtyCups);
 	}
+	/**
+	 * Pour coffee in the pot.
+	 * 
+	 * @param qtyCups - Quantity of coffee cups that are poured in the pot.
+	 */
+	public void pourCoffeeInPot(int qtyCups) {
+		warmerPlate.fillPot(qtyCups);
+	}
 
 	/**
 	 * Place the pot in warmerPlater.
@@ -105,6 +113,13 @@ public class CoffeeMaker {
 	 */
 	public int getWaterOfBoiler() {
 		return boiler.getCupsPouredIn();
+	}
+	
+	/**
+	 * Get the actual cups in Pot.
+	 */
+	public int getCupsInPot() {
+		return warmerPlate.getCupsInPot();
 	}
 
 }
