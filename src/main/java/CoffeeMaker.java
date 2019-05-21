@@ -12,14 +12,14 @@ public class CoffeeMaker {
 	 * and warmerPlate
 	 */
 	public CoffeeMaker() {
-		lightIndicator = new LightIndicator();
+		lightIndicator = new Component();
 		boiler = new Boiler();
 		warmerPlate = new WarmerPlate();
 	}
 
 	/**
 	 * Once the button is pressed the CoffeeMaker starts with the brewing process
-	 * First boils water Then starts coffee dripping
+	 * First boils water Then starts coffee dripping.
 	 * 
 	 * @param qtyCups - To start the process it is needed to give the quantity of
 	 *                coffee cups

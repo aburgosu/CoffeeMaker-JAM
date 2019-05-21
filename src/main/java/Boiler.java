@@ -7,12 +7,16 @@ public class Boiler {
 	private IComponent heatingElement;
 	private IContainer waterContainer;
 
+	/**
+	 * Boiler constructor creates every necessary part that compose it.
+	 * Due to CoffeeMaker's capacity is 12 cups, waterContainer is created with a totalCapacity equal to 12.
+	 */
 	public Boiler() {
 		waterSensor = new WaterSensor();
-		pressureValve = new Valve();
-		heatingElement = new HeatingElement();
+		pressureValve = new Component();
+		heatingElement = new Component();
 		receptacleSensor = new ReceptacleSensor();
-		waterContainer = new WaterContainer(12);// CoffeeMaker's totalCapacity is 12 cups
+		waterContainer = new Container(12);// CoffeeMaker's totalCapacity is 12 cups
 	}
 
 	/**
@@ -42,6 +46,7 @@ public class Boiler {
 		if (waterSensor.getStatus() == WaterSensor.BOILER_NOT_EMPTY
 				&& receptacleSensor.getStatus() == ReceptacleSensor.RECEPTACLE_NOT_EMPTY) {
 			pressureValve.turnOff();
+			System.out.println("Pressure relief valve CLOSED");
 			heatingElement.turnOn();
 			System.out.println("Boiler's heatingElement ON");
 			for (int i = 0; i < waterContainer.getCapacityInUse(); i++) {
@@ -58,6 +63,7 @@ public class Boiler {
 	 */
 	public void stopHeatingWater() {
 		pressureValve.turnOn();
+		System.out.println("Pressure relief valve OPENED");
 		heatingElement.turnOff();
 		System.out.println("Boiler's heatingElement OFF");
 	}
