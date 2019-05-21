@@ -45,6 +45,8 @@ public class CoffeeMakerUI {
 	JComboBox qtyCups;
 	JButton btnBrew;
 	JProgressBar progressBar;
+	JLabel lblLedPlate;
+	JLabel lblLedBoiler;
 
 	/**
 	 * Launch the application.
@@ -91,6 +93,16 @@ public class CoffeeMakerUI {
 		progressBar.setStringPainted(true);
 		progressBar.setBounds(122, 410, 164, 24);
 		imagePanel.add(progressBar);
+		
+		lblLedPlate = new JLabel("");
+		lblLedPlate.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/ledOFF.png")));
+		lblLedPlate.setBounds(38, 372, 26, 24);
+		imagePanel.add(lblLedPlate);
+		
+		lblLedBoiler = new JLabel("");
+		lblLedBoiler.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/ledOFF.png")));
+		lblLedBoiler.setBounds(244, 268, 26, 24);
+		imagePanel.add(lblLedBoiler);
 
 		lblBoiler = new JLabel("");
 		lblBoiler.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/cleanBoiler.png")));
@@ -162,9 +174,11 @@ public class CoffeeMakerUI {
 		btnTakePot = new JButton("Take Pot");
 		btnTakePot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				markIV.liftPot();
-				worker.cancel(true);
+				markIV.liftPot();				
 				lblPot.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/withoutPot.png")));
+				lblLedPlate.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/ledOFF.png")));
+				lblLedBoiler.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/ledOFF.png")));
+				worker.cancel(true);
 
 			}
 		});
@@ -186,16 +200,21 @@ public class CoffeeMakerUI {
 
 				if (markIV.getWarmerPlateStatus() != PlateSensor.WARMER_EMPTY) {
 					int qtyCupsSelected = Integer.parseInt(qtyCups.getSelectedItem().toString());
-					if (qtyCupsSelected <= markIV.getWaterOfBoiler()) {
-						lblLed.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/barRed.png")));
-						mainFrame.update(mainFrame.getGraphics());
+					if (markIV.getReceptacleStatus() == ReceptacleSensor.RECEPTACLE_NOT_EMPTY) {
+						if (qtyCupsSelected <= markIV.getWaterOfBoiler()) {
+							lblLed.setIcon(
+									new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/barRed.png")));
+							mainFrame.update(mainFrame.getGraphics());
 
-						// Initialize in background
-						initializeWorker(qtyCupsSelected);
-						worker.execute();
+							// Initialize in background
+							initializeWorker(qtyCupsSelected);
+							worker.execute();
 
+						} else {
+							JOptionPane.showMessageDialog(null, "Insufficient water!");
+						}
 					} else {
-						JOptionPane.showMessageDialog(null, "Insufficient water!");
+						JOptionPane.showMessageDialog(null, "Please, fill the receptacle with ground coffee");
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Please, place the pot");
@@ -212,26 +231,36 @@ public class CoffeeMakerUI {
 			@Override
 			protected Void doInBackground() throws Exception {
 				markIV.brewCoffee(qtyCupsSelected);
-				int progressBarIncrement = 100 / (qtyCupsSelected * 2);
-				for (int i = 0; i < qtyCupsSelected * 2; i++) {
-					Thread.sleep(500);
+				int progressBarIncrement = 100 / qtyCupsSelected;
+				for (int i = 1; i <= qtyCupsSelected; i++) {
+					Thread.sleep(1000);
 					progressBar.setValue(progressBar.getValue() + progressBarIncrement);
-					if (i == qtyCupsSelected * 2 - 1) {
+					if (i == 2 || i == 4 || i == 6 || i == 8 || i == 10 || i == 12) {
+
+						String icon = "/visualResources/potFilled" + (i) + ".png";
+						lblPot.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource(icon)));
+						markIV.pourWaterInBoiler(markIV.getWaterOfBoiler() - 2);
+						icon = "/visualResources/boilerFilled" + (markIV.getWaterOfBoiler()) + ".png";
+						lblBoiler.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource(icon)));
+					}
+					if (i == qtyCupsSelected) {
 						progressBar.setValue(100);
 						lblLed.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/barGreen.png")));
 						markIV.liftPot();
 					}
-					if (i == 2 || i == 4 || i == 6 || i == 8 || i == 10 || i == 12) {
-						
-						String icon = "/visualResources/potFilled" + (i-2) + ".png";
-						lblPot.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource(icon)));
-						icon = "/visualResources/boilerFilled" + (markIV.getWaterOfBoiler()) + ".png";
-						lblBoiler.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource(icon)));
-						markIV.pourWaterInBoiler(markIV.getWaterOfBoiler() - 2);
-
+					if (markIV.getWarmerPlateStatus()==PlateSensor.POT_NOT_EMPTY) {
+						lblLedPlate.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/ledON.png")));
+					}
+					
+					if (markIV.getBoilerHeaterStatus()==false) {
+						lblLedBoiler.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/ledON.png")));
+					}else {
+						lblLedBoiler.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/ledOFF.png")));
 					}
 
 				}
+					lblLedBoiler.setIcon(new ImageIcon(CoffeeMakerUI.class.getResource("/visualResources/ledOFF.png")));
+				
 
 				return null;
 			}

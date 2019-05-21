@@ -121,5 +121,20 @@ public class CoffeeMaker {
 	public int getCupsInPot() {
 		return warmerPlate.getCupsInPot();
 	}
-
+	
+	/**
+	 * Get the actual status of receptacle sensor.
+	 */
+	public int getReceptacleStatus() {
+		return boiler.getReceptacleStatus();
+	}
+	
+	/**
+	 * Get the actual status of water heater sensor.
+	 */
+	public boolean getBoilerHeaterStatus() {
+		return boiler.getHeatingElementStatus();
+	}
+	
+	
 }

@@ -74,5 +74,13 @@ public class Boiler {
 	public void fillReceptacle() {
 		receptacleSensor.setStatus(ReceptacleSensor.RECEPTACLE_NOT_EMPTY);
 	}
+	
+	public int getReceptacleStatus(){
+		return receptacleSensor.getStatus();
+	}
+	
+	public boolean getHeatingElementStatus() {
+		return heatingElement.getStatus();
+	}
 
 }
