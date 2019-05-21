@@ -2,7 +2,7 @@ package main.java;
 
 
 public class Component implements IComponent {
-	protected boolean status;
+	private boolean status;
 
 	public Component() {
 		status = false;
